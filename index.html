@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Voting System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .neubrutalism {
+            border: 3px solid black;
+            box-shadow: 5px 5px 0px black;
+            transition: all 0.2s ease;
+        }
+        .neubrutalism:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px black;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-[#F0F0F0] min-h-screen p-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="bg-[#FF90E8] p-6 neubrutalism mb-8">
+            <h1 class="text-4xl font-bold text-center">E-Voting System</h1>
+        </div>
+
+        <!-- Login Tabs -->
+        <div class="mb-8 flex gap-4 justify-center">
+            <button onclick="switchTab('admin')" class="bg-[#90FF96] px-6 py-3 neubrutalism font-bold">
+                Admin Login
+            </button>
+            <button onclick="switchTab('voter')" class="bg-[#90BEFF] px-6 py-3 neubrutalism font-bold">
+                Voter Login
+            </button>
+        </div>
+
+        <!-- Admin Login Section -->
+        <div id="admin-login" class="tab-content active">
+            <div class="bg-white p-6 neubrutalism mb-8">
+                <h2 class="text-2xl font-bold mb-6">Admin Login</h2>
+                <form id="admin-form" class="space-y-4">
+                    <div>
+                        <label class="block mb-2 font-bold">Username</label>
+                        <input type="text" class="w-full p-2 neubrutalism" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-bold">Password</label>
+                        <input type="password" class="w-full p-2 neubrutalism" required>
+                    </div>
+                    <button type="submit" class="bg-[#FF90E8] px-6 py-3 neubrutalism font-bold w-full">
+                        Login as Admin
+                    </button>
+                </form>
+            </div>
+
+            <!-- Candidate Management (Initially Hidden) -->
+            <div id="candidate-management" class="hidden bg-white p-6 neubrutalism">
+                <h3 class="text-2xl font-bold mb-6">Candidate Management</h3>
+                <form id="candidate-form" class="space-y-4 mb-8">
+                    <div>
+                        <label class="block mb-2 font-bold">Candidate Name</label>
+                        <input type="text" class="w-full p-2 neubrutalism" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-bold">Position</label>
+                        <input type="text" class="w-full p-2 neubrutalism" required>
+                    </div>
+                    <div class="flex gap-4">
+                        <button type="submit" class="bg-[#90FF96] px-6 py-3 neubrutalism font-bold flex-1">Add</button>
+                        <button type="button" class="bg-[#FFB890] px-6 py-3 neubrutalism font-bold flex-1">Update</button>
+                        <button type="button" class="bg-[#FF9090] px-6 py-3 neubrutalism font-bold flex-1">Delete</button>
+                    </div>
+                </form>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border-2 border-black">
+                        <thead>
+                            <tr class="bg-[#90FF96]">
+                                <th class="border-2 border-black p-2">ID</th>
+                                <th class="border-2 border-black p-2">Name</th>
+                                <th class="border-2 border-black p-2">Position</th>
+                                <th class="border-2 border-black p-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border-2 border-black p-2">1</td>
+                                <td class="border-2 border-black p-2">John Doe</td>
+                                <td class="border-2 border-black p-2">President</td>
+                                <td class="border-2 border-black p-2">
+                                    <button class="bg-[#FFB890] px-2 py-1 neubrutalism">Edit</button>
+                                    <button class="bg-[#FF9090] px-2 py-1 neubrutalism">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voter Login Section -->
+        <div id="voter-login" class="tab-content">
+            <div class="bg-white p-6 neubrutalism mb-8">
+                <h2 class="text-2xl font-bold mb-6">Voter Login</h2>
+                <form id="voter-form" class="space-y-4">
+                    <div>
+                        <label class="block mb-2 font-bold">Voter ID</label>
+                        <input type="text" class="w-full p-2 neubrutalism" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-bold">Password</label>
+                        <input type="password" class="w-full p-2 neubrutalism" required>
+                    </div>
+                    <button type="submit" class="bg-[#90BEFF] px-6 py-3 neubrutalism font-bold w-full">
+                        Login as Voter
+                    </button>
+                </form>
+            </div>
+
+            <!-- Voter Information (Initially Hidden) -->
+            <div id="voter-information" class="hidden bg-white p-6 neubrutalism">
+                <h3 class="text-2xl font-bold mb-6">Voter Information</h3>
+                <div class="mb-8 p-4 bg-[#90BEFF] neubrutalism">
+                    <h4 class="font-bold mb-2">Voter ID Card</h4>
+                    <div class="bg-white p-4 neubrutalism">
+                        <p><strong>Name:</strong> Jane Smith</p>
+                        <p><strong>Voter ID:</strong> VOT123456</p>
+                        <p><strong>District:</strong> Central</p>
+                        <button class="bg-[#90FF96] px-4 py-2 neubrutalism mt-4">
+                            <i class="bi bi-download"></i> Download Card
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border-2 border-black">
+                        <thead>
+                            <tr class="bg-[#90BEFF]">
+                                <th class="border-2 border-black p-2">ID</th>
+                                <th class="border-2 border-black p-2">Name</th>
+                                <th class="border-2 border-black p-2">Status</th>
+                                <th class="border-2 border-black p-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border-2 border-black p-2">VOT123456</td>
+                                <td class="border-2 border-black p-2">Jane Smith</td>
+                                <td class="border-2 border-black p-2">Active</td>
+                                <td class="border-2 border-black p-2">
+                                    <button class="bg-[#FFB890] px-2 py-1 neubrutalism">Edit</button>
+                                    <button class="bg-[#FF9090] px-2 py-1 neubrutalism">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tab}-login`).classList.add('active');
+        }
+
+        // Admin Login Handler
+        document.getElementById('admin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('candidate-management').classList.remove('hidden');
+        });
+
+        // Voter Login Handler
+        document.getElementById('voter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('voter-information').classList.remove('hidden');
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
